@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🎉</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #fff;
+      color: #ff6b6b;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff6b6b;
+      color: #fff;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎂 Happy Birthday jaan ❤️</h1>
+  <p>Wish you a very Happy birthday meri jaan❤️ Allah bless you tumhe khusiyon se nawaze 😊 tumari har dua qubool kare god......main sumit wali dua qabool kre 😂😂 ....thank uh so much meri life me aane ke liye jaan 🫠🫠.....you are the best aur sbse important person in my life janu 😍🫠🤍....... i can't live without you hm se kbhi durr mt hona jaan ❤️🫠hmri life ka sbse khubsurat hissa ho tum 🫠 .....ek tere mere pass hone se hi meri sb prblm muje km lgti h itna kash aur pyara impact h tera meri life par jaan 🫠.....bass ek wada karo jo tumne mera haath thama h usse kabhi chhodna mat 🥰... hamesha khush raho bas yahi dua hai meri 😊... i wish ki me tere sath rhun meri akhiri sans tk forever ❤️..... i always love u meri jaan ❤️ ......Duriyo ke hone se koi fark nahi padhta ❤️me tere bahut pass hun..... tum kal bhi mere thi or aj bhi meri ho aur aage bhi rhogi 🫠😇...... tum ho to ham hai tere bina kuch bhi to nhi h hm 🥲🥰....... tum hamari zindagi ka vo ehsas ho jinhe me yad karke muskurata hun😊..... tum hamari zindegi me hamesha rehna bas yahi dua hai meri ...... I  love you so so much  beta 🥰 .... enjoy your day 🌸 once again I wish u a very  happyyyyy birthday mera bacha  👸👸🎂🎂🎉</p>
+  <button onclick="startConfetti()">Celebrate 🎊</button>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script>
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      size: Math.random() * 6 + 2,
+      speedY: Math.random() * 3 + 2,
+      color: `hsl(${Math.random() * 360}, 100%, 50%)`
+    };
+  }
+
+  function startConfetti() {
+    for (let i = 0; i < 150; i++) {
+      particles.push(createParticle());
+    }
+    animate();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, index) => {
+      p.y += p.speedY;
+
+      if (p.y > canvas.height) {
+        particles[index] = createParticle();
+        particles[index].y = 0;
+      }
+
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+    });
+
+    requestAnimationFrame(animate);
+  }
+</script>
+
+</body>
+</html>
